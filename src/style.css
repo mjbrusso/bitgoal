@@ -1,0 +1,289 @@
+body {
+	background-color: #F1DEDE;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+header {
+	margin-bottom: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
+header button {
+	background-color: #F1DEDE;
+	border: #80727b 3px solid;
+	color: #80727b;
+	border-radius: 6px;
+	width: 30px;
+	height: 30px;
+	font-size: large;
+	font-weight: bold;
+	padding: 0;
+	cursor: pointer;
+}
+
+.popup_overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 10;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.popup {
+	margin: 0 auto;
+	background-color: #F1DEDE;
+	border-radius: 10px;
+	padding: 20px;
+	min-height: 50%;
+	max-height: 85%;
+	min-width: 65%;
+	max-width: 85%;
+	transition: all 5s ease-in-out;
+	overflow: auto;
+}
+
+.popup_header {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 0;
+	align-items: center;
+}
+
+.popup_header h2 {
+	margin: 0;
+	color: #333;
+}
+
+.popup_header span.spacer {
+	flex: 1;
+}
+
+
+.popup img {
+	max-width: 100%;
+}
+
+.popup .close {
+	font-size: 32px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #333;
+	margin-right: 10px;
+}
+
+
+.popup .content p {
+	margin: 5px;
+}
+
+.popup .content>div {
+	margin-bottom: 2px;
+	display: flex;
+	align-items: center;
+}
+
+.popup .content>div img {
+	margin-right: 6px;
+}
+
+.popup .credits {
+	font-size: 0.9em;
+	padding-top: 5px;
+	padding-left: 10px;
+	border-top: #80727b 1px solid;
+	font-family: monospace;
+}
+
+.popup .credits div {
+	margin-top: 5px;
+}
+
+.popup .counters {
+	display: flex;
+	justify-content: space-around;
+}
+
+.popup .counters .counter {
+	justify-content: center;
+	align-self: start;
+}
+
+.popup .counters .counter * {
+	text-align: center;
+	margin: 5px;
+}
+
+.popup .histogram {
+	display: block !important;
+	flex: 1;
+}
+
+.popup .histogram span {
+	font-size: 1.5em;
+	min-width: 32px;
+}
+
+.popup .histogram div.chart_row {
+	display: flex;
+	margin: 3px;
+	align-items: center;
+}
+
+.popup .histogram div.bar {
+	background-color: #909580;
+	margin-left: 6px;
+	padding: 4px 10px 4px 4px;
+	color: white;
+	text-align: right;
+	min-width: 10px;
+}
+
+.popup .histogram div.red {
+	background-color: #e67171;
+}
+
+.board {
+	visibility: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.boardrow {
+	display: flex;
+}
+
+
+
+.boardcell {
+	color: #3C3C3C;
+	background-color: #F1DEDE;
+	width: 35px;
+	height: 35px;
+	margin: 1px;
+	padding-top: 0px;
+	text-align: center;
+	font-size: 40px;
+	position: relative;
+	border-radius: 4px;
+}
+
+.boardcell[data-value=""] {
+	border: #bababa 2px solid;
+}
+
+
+.boardcell[data-value="0"] {
+	border: #80727b 2px solid;
+}
+
+.boardcell[data-value="1"] {
+	background-color: #6fcf97;
+	border: #80727b 2px solid;
+}
+
+.boardrow:last-child {
+	margin-top: 10px;
+	padding: 2px;
+	border: #80727b 2px solid;
+	border-radius: 4px;
+	background-color: darkgray;
+}
+
+.invalid span {
+	color: #865d5d !important
+}
+
+.visible {
+	display: block !important;
+}
+
+.invisible {
+	display: none !important;
+}
+
+
+#message {
+	font-size: 24px;
+	text-align: center;
+	margin-top: 5px;
+	padding: 2px;
+	color: #3C3C3C;
+}
+
+#nexthour {
+	font-size: 18px;
+	text-align: center;
+	margin-top: 2px;
+	padding: 2px;
+	color: #3C3C3C;
+}
+
+#controls {
+	padding: 5px;
+	background: gray;
+	box-shadow: 0 0 50px rgb(0 0 0 / 60%);
+	user-select: none;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#controls .fieldset {
+	display: inline;
+	border: none;
+	margin-left: 20px;
+}
+
+.toolbar .share {
+	padding: 5px;
+	background-color: #80727b;
+	border: #80727b 3px solid;
+	border-radius: 6px;
+	cursor: pointer;
+	color: #f1dede;
+}
+
+.toolbar .share img {
+	height: 23px;
+	vertical-align: middle;
+}
+
+.toolbar .share span {
+	vertical-align: middle;
+}
+
+.toolbar span.sharemsg {
+	font-size: 0.9em;
+	margin-left: 10px;
+	background-color: #333;
+	color: white;
+	padding: 7px;
+	border-radius: 4px;
+	animation: fade_in_show 0.5s;
+
+	z-index: 2;
+	position: absolute;
+	width: 160px;
+	left: calc(50% - 80px);
+}
+
+@keyframes fade_in_show {
+	0% {
+		opacity: 0;
+		transform: scale(0)
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1)
+	}
+}

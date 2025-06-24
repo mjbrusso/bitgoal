@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt" prefix="og: http://ogp.me/ns#">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Game w/o Name (TODO)nn</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/manifest.json">
+
+	<!-- Primary Meta Tags -->
+	<meta name="title" content="TODO">
+	<meta name="description" content="TODO">
+
+	<!-- Social Media -->
+	<!-- Site Name, Title, and Description to be displayed -->
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="TODO">
+	<meta property="og:title" content="TODO">
+	<meta property="og:description" content="TODO">
+	<!-- Image to display -->
+	<meta property="og:image" itemprop="image" content="TODO">
+	<meta property="og:image:secure_url" content="TODO" />
+	<link itemprop="thumbnailUrl" href="TODO">
+	<meta property="og:url" content="TODO">
+</head>
+
+<body>
+	<h1 style="display: none;">TODO</h1>
+	<header>
+		<button id="info" style="margin-right: 70px;">?</button>
+		<span>Game w/o Name (TODO)</span>
+		<!-- <img src=" img/logo4.png" alt="logo"> -->
+		<button id="stats" style="margin-left: 70px;"><img src="img/chart.png" alt="Botão Progresso"></button>
+	</header>
+	<div class="board">
+		<div class="boardrow">
+			<div class="boardcell" data-value=""> </div>
+		</div>
+	</div>
+	<div id="message"></div>
+	<div id="nexthour"></div>
+
+	<div id="controls">
+		<label>
+			<input type="checkbox" id="notCheckbox"> <u>N</u>ot
+		</label>
+		<fieldset style="display:inline; border:none; margin-left:20px;">
+			<label>
+				<input type="radio" name="bitop" id="andRadio" value="and" checked> And
+			</label>
+			<label>
+				<input type="radio" name="bitop" id="orRadio" value="or"> Or
+			</label>
+			<label>
+				<input type="radio" name="bitop" id="xorRadio" value="xor"> Xor
+			</label>
+		</fieldset>
+	</div>
+	<!-- <div class="popup_overlay invisible">
+		<div class="popup info">
+			<div class="popup_header">
+				<h2>Instruções</h2>
+				<span class="spacer">&nbsp;</span>
+				<a class="close" href="#">&times;</a>
+			</div>
+
+			<div class="content">
+				<p>Você tem cinco tentativas para descobrir a palavra do dia. Para cada tentativa, informe uma
+					palavra válida e pressione ENTER.</p>
+				<p>Os blocos de cada letra indicarão se você acertou ou não conforme o seguinte padrão:</p>
+				<img src="img/howto_row.png" alt="exemplo">
+				<div><img src="img/block_ok.png" alt="ok">O bloco verde significa que você acertou aquela letra da
+					palavra.
+				</div>
+				<div><img src="img/block_up.png" alt="antes">Você deve escolher uma letra anterior no alfabeto para
+					esta posição (do A ao I, neste exemplo).</div>
+				<div><img src="img/block_down.png" alt="depois">Você deve escolher uma letra posterior no alfabeto
+					para esta posição (do H ao Z, neste exemplo).</div>
+				<p>Acentos e cedilha são inseridos automaticamente e não interferem na ordenação das letras.
+					Portanto <b>C</b> e <b>Ç</b> são considerados na
+					mesma posição do alfabeto, assim como <b>A</b> e <b>Ã</b>.</p>
+			</div>
+			<div class="credits">
+				<div>Criado por <a href="https://www.linkedin.com/in/mjbrusso/" target="_blank">mjbrusso</a>
+					(#frameworkless JS e CSS)</div>
+				<div>Palavras extraídas de <a href="https://pt-br.libreoffice.org/projetos/vero/"
+						target="_blank">VERO</a>
+					com <a href="http://hunspell.github.io/" target="_blank">unmunch</a>
+				</div>
+				<div>Versão 1.10</div>
+			</div>
+		</div>
+
+		<div class="popup stats">
+			<div class="popup_header">
+				<h2>Estatísticas</h2>
+				<span class="spacer">&nbsp;</span>
+				<a class="close" href="#">&times;</a>
+			</div>
+
+			<div class="content">
+				<div class="counters">
+					<div id="playedCount" class="counter">
+						<h2>x</h2>
+						<div>jogos completados</div>
+					</div>
+					<div id="winCount" class="counter">
+						<h2>x</h2>
+						<div>de vitórias</div>
+					</div>
+					<div id="currentStreak" class="counter">
+						<h2>x</h2>
+						<div>sequência atual</div>
+					</div>
+					<div id="maxStreak" class="counter">
+						<h2>x</h2>
+						<div>maior sequência</div>
+					</div>
+				</div>
+				<div>
+					<div class="histogram">
+						<h4>Distribuição</h4>
+						<div class="chart_row">
+							<span>①</span>
+							<div class="bar">.</div>
+						</div>
+						<div class="chart_row">
+							<span>②</span>
+							<div class="bar"></div>
+						</div>
+						<div class="chart_row">
+							<span>③</span>
+							<div class="bar"></div>
+						</div>
+						<div class="chart_row">
+							<span>④</span>
+							<div class="bar"></div>
+						</div>
+						<div class="chart_row">
+							<span>⑤</span>
+							<div class="bar"></div>
+						</div>
+						<div class="chart_row">
+							<span>∅</span>
+							<div class="bar red"></div>
+						</div>
+					</div>
+				</div>
+				<p class="toolbar">
+					<button class="share">
+						<img src="img/share.png" alt="Compartilhar">
+						<span>Compartilhar</span>
+					</button>
+					<span class="sharemsg invisible">Use Ctrl-V para colar nas suas redes sociais</span>
+				</p>
+			</div>
+		</div>
+	</div> -->
+	<!-- <span itemprop="image" itemscope itemtype="image/jpeg">
+		<link itemprop="url" href="https://gameupado.web.app/img/thumb.jpg">
+	</span> -->
+	<script src="game.js"></script>
+	<script src="index.js"></script>
+</body>
+
+</html>
