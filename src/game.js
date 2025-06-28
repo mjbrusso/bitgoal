@@ -5,11 +5,13 @@ class Game {
         AND: 'A',
         OR: 'O',
         XOR: 'X',
-        NOT: 'N'
+        NOT: 'N',
+        SHL: 'ARROWLEFT',
+        SHR: 'ARROWRIGHT',
     }
     //#region Private attributes
     #numCols = 8
-    #numRows = 10
+    #numRows = 13
     #maxValue = (1 << this.#numCols) - 1
     #targetValue
     #currentValue
@@ -20,17 +22,22 @@ class Game {
 
     #board
     #rows
-    #notCheckBox
+    #notButton
+    #shlButton
+    #shrButton
     #andRadio
     #orRadio
     #xorRadio
     #intervalId
+    #intervalMs = 1000
     //#endregion Private attributes
 
     //#region Public methods and constructor
     constructor() {
         this.#board = document.querySelector('.board')
-        this.#notCheckBox = document.getElementById('notCheckbox')
+        this.#notButton = document.getElementById('notButton')
+        this.#shlButton = document.getElementById('shlButton')
+        this.#shrButton = document.getElementById('shrButton')
         this.#andRadio = document.getElementById('andRadio')
         this.#orRadio = document.getElementById('orRadio')
         this.#xorRadio = document.getElementById('xorRadio')
@@ -57,8 +64,10 @@ class Game {
         }
         this.#rows = Array.from(document.querySelectorAll('.boardrow'))
         // Eventos
-        document.addEventListener('keydown', (e) => { this.#processKey(e.key.toUpperCase()) })
-        this.#notCheckBox.addEventListener('change', () => { this.#not() })
+        document.addEventListener('keydown', (e) => { document.title = e.key; this.#processKey(e.key.toUpperCase()) })
+        this.#notButton.addEventListener('click', () => { this.#not() })
+        this.#shlButton.addEventListener('click', () => { this.#shl() })
+        this.#shrButton.addEventListener('click', () => { this.#shr() })
         this.#andRadio.addEventListener('change', (e) => { if (e.target.checked) this.#nextOperation = Game.Operations.AND })
         this.#orRadio.addEventListener('change', (e) => { if (e.target.checked) this.#nextOperation = Game.Operations.OR })
         this.#xorRadio.addEventListener('change', (e) => { if (e.target.checked) this.#nextOperation = Game.Operations.XOR })
@@ -69,24 +78,33 @@ class Game {
     #processKey(key) {
         switch (key) {
             case Game.Operations.NOT:
+            case 'ARROWUP':
                 this.#not()
-                this.#notCheckBox.checked = !this.#notCheckBox.checked
-                break;
+                break
+            case Game.Operations.SHL:
+                this.#rol()
+                break
+            case Game.Operations.SHR:
+                this.#ror()
+                break
             case Game.Operations.AND:
                 document.getElementById('andRadio').checked = true
                 this.#nextOperation = Game.Operations.AND
-                break;
+                break
             case Game.Operations.OR:
                 document.getElementById('orRadio').checked = true
                 this.#nextOperation = Game.Operations.OR
-                break;
+                break
             case Game.Operations.XOR:
                 document.getElementById('xorRadio').checked = true
                 this.#nextOperation = Game.Operations.XOR
-                break;
+                break
+            case 'ARROWDOWN':
+                this.#intervalCallback()
+                break
             case 'C':
                 this.#clearBoard()
-                break;
+                break
         }
     }
 
@@ -94,6 +112,8 @@ class Game {
         const cells = this.#rows[row].querySelectorAll('.boardcell')
         const bits = value.toString(2).padStart(this.#numCols, '0')
         cells.forEach((cell, i) => { cell.setAttribute('data-value', bits[i]) })
+
+        this.#debug()
     }
 
     #clearRow(row) {
@@ -125,7 +145,6 @@ class Game {
             this.#currentRow = 0
         }
         this.#displayRow()
-        //document.getElementById('message').innerText = `${this.#currentRow} ${this.#currentValue} ${this.#bottomRow} ${this.#bottomValue} ${this.#nextOperation}`
     }
 
     #start() {
@@ -140,7 +159,7 @@ class Game {
         this.#nextOperation = Game.Operations.AND
 
         if (this.#intervalId) clearInterval(this.#intervalId)
-        this.#intervalId = setInterval(() => { this.#intervalCallback() }, 500 /* ms */)
+        this.#intervalId = setInterval(() => { this.#intervalCallback() }, this.#intervalMs)
     }
 
     #doOperation() {
@@ -166,6 +185,32 @@ class Game {
     #not() {
         this.#currentValue = ~this.#currentValue & this.#maxValue
         this.#displayRow()
+    }
+
+    #shl() {
+        this.#currentValue = (this.#currentValue << 1) & this.#maxValue
+        this.#displayRow()
+    }
+
+    #shr() {
+        this.#currentValue = (this.#currentValue >> 1) & this.#maxValue
+        this.#displayRow()
+    }
+
+    #rol() {
+        const msb = (this.#currentValue >> (8 - 1))
+        this.#currentValue = ((this.#currentValue << 1) | msb) & this.#maxValue
+        this.#displayRow()
+    }
+
+    #ror() {
+        const lsb = this.#currentValue & 1
+        this.#currentValue = ((this.#currentValue >> 1) | (lsb << this.#numCols-1)) & this.#maxValue
+        this.#displayRow()
+    }
+
+    #debug() {
+        document.getElementById('message').innerText = this.#currentValue // `${this.#currentRow} ${this.#currentValue} ${this.#bottomRow} ${this.#bottomValue} ${this.#nextOperation}`
     }
     //#endregion Private methods
 }

@@ -237,10 +237,13 @@ header button {
 	margin-right: auto;
 }
 
-#controls .fieldset {
+#controls fieldset {
 	display: inline;
 	border: none;
-	margin-left: 20px;
+}
+
+#controls button{
+	height: 2em;
 }
 
 .toolbar .share {
