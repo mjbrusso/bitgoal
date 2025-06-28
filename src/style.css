@@ -161,13 +161,11 @@ header button {
 	display: flex;
 }
 
-
-
 .boardcell {
 	color: #3C3C3C;
 	background-color: #F1DEDE;
-	width: 35px;
-	height: 35px;
+	width: 30px;
+	height: 30px;
 	margin: 1px;
 	padding-top: 0px;
 	text-align: center;
@@ -179,7 +177,6 @@ header button {
 .boardcell[data-value=""] {
 	border: #bababa 2px solid;
 }
-
 
 .boardcell[data-value="0"] {
 	border: #80727b 2px solid;
@@ -212,7 +209,8 @@ header button {
 
 
 #message {
-	font-size: 24px;
+	font-family: monospace;
+	font-size: 12px;
 	text-align: center;
 	margin-top: 5px;
 	padding: 2px;
@@ -242,7 +240,7 @@ header button {
 	border: none;
 }
 
-#controls button{
+#controls button {
 	height: 2em;
 }
 
